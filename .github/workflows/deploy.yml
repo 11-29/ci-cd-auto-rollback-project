@@ -25,8 +25,6 @@ jobs:
 
             docker tag my-app my-app:latest || true
 
-            docker stop my-app || true
-            docker rm my-app || true
 
             docker run -d -p 5001:5000 --name my-app-new my-app:new
 
@@ -34,6 +32,8 @@ jobs:
 
             if curl -f http://localhost:5001/health; then
               echo "Healthy ✅"
+              docker stop my-app || true
+              docker rm my-app || true
               docker stop my-app-new
               docker rm my-app-new
               docker run -d -p 5000:5000 --name my-app my-app:new
