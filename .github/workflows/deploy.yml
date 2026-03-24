@@ -40,7 +40,7 @@ jobs:
               docker run -d -p 5000:5000 --name my-app my-app:new
             else
               echo "Rollback ❌"
-              docker stop my-app-new
-              docker rm my-app-new
+              docker rm -f my-app-new || true
+              docker rm -f my-app || true
               docker run -d -p 5000:5000 --name my-app my-app:latest
             fi
