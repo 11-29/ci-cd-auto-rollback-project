@@ -32,8 +32,8 @@ jobs:
 
             if curl -f http://localhost:5001/health; then
               echo "Healthy ✅"
-              docker stop my-app || true
-              docker rm my-app || true
+              docker ps -q --filter "publish=5000" | xargs -r docker stop
+              docker ps -aq --filter "publish=5000" | xargs -r docker rm
               docker stop my-app-new
               docker rm my-app-new
               docker run -d -p 5000:5000 --name my-app my-app:new
