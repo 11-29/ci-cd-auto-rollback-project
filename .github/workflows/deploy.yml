@@ -28,11 +28,11 @@ jobs:
             docker stop my-app || true
             docker rm my-app || true
 
-            docker run -d -p 5000:5000 --name my-app-new my-app:new
+            docker run -d -p 5001:5000 --name my-app-new my-app:new
 
             sleep 10
 
-            if curl -f http://localhost:5000/health; then
+            if curl -f http://localhost:5001/health; then
               echo "Healthy ✅"
               docker stop my-app-new
               docker rm my-app-new
