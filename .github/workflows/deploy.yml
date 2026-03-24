@@ -17,7 +17,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ci-cd-project
+            cd ci-cd-auto-rollback-project
 
             git pull
 
