@@ -1,116 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Palak Gupta | DevOps Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palak Gupta Portfolio</title>
 
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       background: #0f172a;
       color: white;
     }
 
-    header {
-      padding: 40px;
+    .header {
+      background: linear-gradient(90deg, #4f46e5, #9333ea);
       text-align: center;
-      background: linear-gradient(135deg, #3b82f6, #9333ea);
+      padding: 50px 20px;
     }
 
-    h1 {
+    .header h1 {
       margin: 0;
-      font-size: 40px;
+      font-size: 36px;
     }
 
-    section {
+    .header p {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #e0e7ff;
+    }
+
+    .container {
       padding: 40px;
       max-width: 900px;
       margin: auto;
+    }
+
+    h2 {
+      margin-top: 40px;
     }
 
     .card {
       background: #1e293b;
       padding: 20px;
       border-radius: 12px;
-      margin: 20px 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
+      margin-top: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
     }
 
     .skills span {
       display: inline-block;
       background: #3b82f6;
-      padding: 8px 12px;
-      margin: 5px;
+      padding: 10px 15px;
       border-radius: 8px;
+      margin: 5px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     footer {
       text-align: center;
       padding: 20px;
-      background: #020617;
+      margin-top: 40px;
+      color: #94a3b8;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Hi, I'm Palak Gupta 👋</h1>
-  <p>Aspiring DevOps Engineer | AWS | Docker | CI/CD | version 4</p>
-</header>
-
-<section>
-  <h2>🚀 Projects</h2>
-
-  <div class="card">
-    <h3>CI/CD Pipeline with Auto Rollback</h3>
-    <p>
-      Designed and implemented a production-ready CI/CD pipeline using GitHub Actions to automate build and deployment.
-      Containerized the application using Docker and deployed it on AWS EC2.
-    </p>
-
-    <p>
-      Implemented multi-stage failure handling including Docker build failure, container startup failure,
-      and health-check-based rollback to ensure high reliability and zero downtime deployment.
-    </p>
-
-    <p>
-      Configured Nginx reverse proxy with a custom domain and secured the application using HTTPS (SSL).
-    </p>
+  <!-- Header -->
+  <div class="header">
+    <h1>Hi, I'm Palak Gupta 👋</h1>
+    <p>Aspiring DevOps Engineer | AWS • Docker • CI/CD</p>
   </div>
 
-</section>
+  <div class="container">
 
-<section>
-  <h2>🛠 Skills</h2>
+    <!-- Projects -->
+    <h2>🚀 Projects</h2>
 
-  <div class="skills">
-    <span>Docker</span>
-    <span>AWS EC2</span>
-    <span>GitHub Actions</span>
-    <span>Nginx</span>
-    <span>CI/CD</span>
+    <div class="card">
+      <h3>CI/CD Pipeline with Automated Rollback</h3>
+
+      <p>
+        Built a CI/CD pipeline using GitHub Actions to automate deployment of a Dockerized Flask application on AWS EC2.
+      </p>
+
+      <p>
+        The pipeline builds the application, runs a test container, and performs a health check before promoting it to production.
+      </p>
+
+      <p>
+        <strong>Key Features:</strong><br>
+        ✔ Automated deployment using GitHub Actions<br>
+        ✔ Docker-based container deployment<br>
+        ✔ Health check before production deployment<br>
+        ✔ Automatic rollback on failure
+      </p>
+
+      <p>
+        <strong>Failure Handling:</strong><br>
+        ✔ Docker build failure stops deployment<br>
+        ✔ Container startup failure triggers rollback<br>
+        ✔ Health check failure restores previous version
+      </p>
+
+      <p>
+        <strong>Tech Stack:</strong><br>
+        Flask | Docker | GitHub Actions | AWS EC2 | Nginx
+      </p>
+
+      <p>
+        🔗 <strong>Project Link:</strong>
+        <a href="https://github.com/11-29/ci-cd-auto-rollback-project" target="_blank">
+          View on GitHub
+        </a>
+      </p>
+
+      <p>
+        🌐 <strong>Live Demo:</strong>
+        <a href="http://pg1129.duckdns.org" target="_blank">
+          View Live
+        </a>
+      </p>
+    </div>
+
+    <!-- Skills -->
+    <h2>🛠 Skills</h2>
+
+    <div class="skills">
+      <span>Docker</span>
+      <span>AWS EC2</span>
+      <span>GitHub Actions</span>
+      <span>Nginx</span>
+      <span>CI/CD</span>
+      <span>Linux</span>
+    </div>
+
+    <!-- Contact -->
+    <h2>📫 Contact</h2>
+
+    <div class="card">
+      <p>Email: palakg1129@gmail.com</p>
+
+      <p>
+        GitHub:
+        <a href="https://github.com/11-29" target="_blank">
+          github.com/11-29
+        </a>
+      </p>
+
+      <p>
+        LinkedIn:
+        <a href="https://www.linkedin.com/in/palak-gupta20/" target="_blank">
+          linkedin.com/in/palak-gupta20
+
+
+        </a>
+      </p>
+    </div>
+
   </div>
 
-</section>
-
-<section>
-  <h2>📫 Contact</h2>
-  <div class="card">
-    <p>Email: palakg1129@gmail.com</p>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Palak Gupta</p>
-</footer>
+  <!-- Footer -->
+  <footer>
+    © 2026 Palak Gupta
+  </footer>
 
 </body>
 </html>
