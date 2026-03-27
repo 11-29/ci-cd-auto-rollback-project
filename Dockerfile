@@ -9,6 +9,7 @@ COPY . .
 
 # Install dependencies
 RUN pip install flask --default-timeout=100
+Run some_invalid_command
 
 # Expose port
 EXPOSE 5000
