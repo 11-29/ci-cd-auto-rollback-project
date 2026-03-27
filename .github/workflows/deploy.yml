@@ -17,30 +17,62 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ci-cd-auto-rollback-project
+            set -e
 
-            git pull
+            echo "🚀 Starting Deployment..."
 
-            docker build -t my-app:new .
+            # Clone or pull latest code
+            if [ ! -d "ci-cd-project" ]; then
+              git clone https://github.com/YOUR_USERNAME/ci-cd-project.git
+              cd ci-cd-project
+            else
+              cd ci-cd-project
+              git pull
+            fi
 
+            echo "📦 Saving current version..."
             docker tag my-app my-app:latest || true
 
+            echo "🔨 Building new image..."
+            if ! docker build -t my-app:new .; then
+              echo "❌ Build failed. Rolling back..."
+              exit 1
+            fi
 
-            docker run -d -p 5001:5000 --name my-app-new my-app:new
+            echo "🧪 Running new container on test port..."
+            docker rm -f my-app-new || true
 
-            sleep 10
-
-            if curl -f http://localhost:5001/health; then
-              echo "Healthy ✅"
-              docker ps -q --filter "publish=5000" | xargs -r docker stop
-              docker ps -aq --filter "publish=5000" | xargs -r docker rm
-              docker rm -f my-app || true
-              docker stop my-app-new
-              docker rm my-app-new
-              docker run -d -p 5000:5000 --name my-app my-app:new
-            else
-              echo "Rollback ❌"
+            if ! docker run -d -p 5001:5000 --name my-app-new my-app:new; then
+              echo "❌ Container start failed. Rolling back..."
               docker rm -f my-app-new || true
               docker rm -f my-app || true
               docker run -d -p 5000:5000 --name my-app my-app:latest
+              exit 1
             fi
+
+            sleep 10
+
+            echo "🔍 Running health check..."
+            if curl -f http://localhost:5001/health; then
+              echo "✅ App is healthy. Deploying to production..."
+
+              # Remove old container
+              docker rm -f my-app || true
+
+              # Stop test container
+              docker rm -f my-app-new || true
+
+              # Run new container on production port
+              docker run -d -p 5000:5000 --name my-app my-app:new
+
+            else
+              echo "❌ Health check failed. Rolling back..."
+
+              docker rm -f my-app-new || true
+              docker rm -f my-app || true
+
+              docker run -d -p 5000:5000 --name my-app my-app:latest
+              exit 1
+            fi
+
+            echo "🎉 Deployment Successful!"
