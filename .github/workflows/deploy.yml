@@ -41,8 +41,11 @@ jobs:
             echo "📦 Saving current version..."
             if docker ps -a --format '{{.Names}}' | grep -q "^my-app$"; then
               docker commit my-app my-app:latest
+              echo "✅ Saved as stable version"
+            else
+              echo "⚠️ No running container found"
             fi
-
+              
             echo "🔨 Building new image..."
             if ! docker build -t my-app:new .; then
               echo "❌ Build failed. Rolling back..."
