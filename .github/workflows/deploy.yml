@@ -39,7 +39,9 @@ jobs:
             git pull
 
             echo "📦 Saving current version..."
-            docker tag my-app my-app:latest || true
+            if docker ps -a --format '{{.Names}}' | grep -q "^my-app$"; then
+              docker commit my-app my-app:latest
+            fi
 
             echo "🔨 Building new image..."
             if ! docker build -t my-app:new .; then
