@@ -23,7 +23,7 @@ jobs:
 
             # Clone or pull latest code
             if [ ! -d "ci-cd-project" ]; then
-              git clone https://github.com/YOUR_USERNAME/ci-cd-project.git
+              git clone https://github.com/11-29/ci-cd-auto-rollback-project.git
               cd ci-cd-project
             else
               cd ci-cd-project
@@ -74,5 +74,5 @@ jobs:
               docker run -d -p 5000:5000 --name my-app my-app:latest
               exit 1
             fi
-
+          
             echo "🎉 Deployment Successful!"
