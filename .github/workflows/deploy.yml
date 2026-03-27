@@ -21,14 +21,22 @@ jobs:
 
             echo "🚀 Starting Deployment..."
 
+            PROJECT_DIR="/home/ubuntu/ci-cd-auto-rollback-project"
+
+            echo "📂 Checking project directory..."
+
             # Clone or pull latest code
-            if [ ! -d "ci-cd-project" ]; then
-              git clone https://github.com/11-29/ci-cd-auto-rollback-project.git
-              cd ci-cd-project
+            if [ ! -d "$PROJECT_DIR" ]; then
+              echo "cloning repo..."
+              git clone https://github.com/11-29/ci-cd-auto-rollback-project.git $PROJECT_DIR
             else
-              cd ci-cd-project
-              git pull
+              echo "Repo exists, pulling latest..."
             fi
+
+            cd $PROJECT_DIR
+
+            echo "⬇️ Pulling latest code..."
+            git pull
 
             echo "📦 Saving current version..."
             docker tag my-app my-app:latest || true
